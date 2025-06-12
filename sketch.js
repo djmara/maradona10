@@ -8,7 +8,7 @@ let quote = " \"That goal became part of soccer history...\nThere are still 10-y
 let glitchSlowdown = false;
 
 function preload() {
-  img = loadImage('maradona.jpeg'); // Make sure this is uploaded in the p5 editor
+  img = loadImage('maradona.jpg'); // Make sure this is uploaded in the p5 editor
   font = loadFont('https://cdnjs.cloudflare.com/ajax/libs/topcoat/0.8.0/font/SourceCodePro-Regular.otf');
 }
 
