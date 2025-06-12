@@ -44,8 +44,8 @@ function draw() {
     s.display();
   }
 
-  if (slices.length > 800) {
-    slices.splice(0, slices.length - 800);
+  if (slices.length > 600) {
+    slices.splice(0, slices.length - 600);
   }
 
   drawButton();
@@ -61,7 +61,7 @@ function drawButton() {
   textAlign(CENTER, CENTER);
   textFont(font);
   textSize(16);
-  text(glitchSlowdown ? "RUN FREE" : "THE NUMBER 111", width / 2, height - 50);
+  text(glitchSlowdown ? "RUN FREE" : "THE NUMBER 122", width / 2, height - 45);
 }
 
 function mousePressed() {
