@@ -61,7 +61,7 @@ function drawButton() {
   textAlign(CENTER, CENTER);
   textFont(font);
   textSize(16);
-  text(glitchSlowdown ? "RUN FREE" : "THE NUMBER 123", width / 2, height - 45);
+  text(glitchSlowdown ? "RUN FREE" : "THE NUMBER 124", width / 2, height - 45);
 }
 
 function mousePressed() {
