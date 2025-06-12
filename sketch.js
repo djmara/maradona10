@@ -30,7 +30,7 @@ function draw() {
   image(img, 0, 0);
 
   let newSlices = glitchSlowdown ? 30 : 200;
-  let maxOffset = glitchSlowdown ? 8 : 700;
+  let maxOffset = glitchSlowdown ? 8 : 300;
 
   for (let i = 0; i < newSlices; i++) {
     let h = int(random(10, 100));
