@@ -29,7 +29,7 @@ function draw() {
   background(0);
   image(img, 0, 0);
 
-  let newSlices = glitchSlowdown ? 30 : 600;
+  let newSlices = glitchSlowdown ? 30 : 200;
   let maxOffset = glitchSlowdown ? 8 : 700;
 
   for (let i = 0; i < newSlices; i++) {
