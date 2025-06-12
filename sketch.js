@@ -1,8 +1,8 @@
-PImage img;
-PGraphics quoteLayer;
-ArrayList<GlitchSlice> slices = new ArrayList<GlitchSlice>();
-PFont font;
-String quote = " \"That goal became part of soccer history...\nThere are still 10-year-old kids out there today\nwith 'Maradona' on their backs.\" ";
+let img;
+let quoteLayer;
+let slices = [];
+let font;
+let quote = " \"That goal became part of soccer history...\nThere are still 10-year-old kids out there today\nwith 'Maradona' on their backs.\" ";
 
 void setup() {
   size(1280, 720);
@@ -65,26 +65,20 @@ void mouseMoved() {
   }
 }
 class GlitchSlice {
-  int y, h;
-  int originalOffset;
-  float currentOffset;
-
-  GlitchSlice(int y, int h, int offset) {
+  constructor(y, h, offset) {
     this.y = y;
     this.h = h;
     this.originalOffset = offset;
     this.currentOffset = offset;
   }
 
-  void update() {
-    // Easing back to 0 offset
-    currentOffset *= 0.9;  // adjust this for faster/slower healing
+  update() {
+    this.currentOffset *= 0.9;
   }
 
-  void display() {
-    int offsetInt = int(currentOffset);
-
-    copy(img, 0, y, width, h, offsetInt, y, width, h);
-    copy(quoteLayer, 0, y, width, h, offsetInt, y, width, h);
+  display() {
+    let offsetInt = int(this.currentOffset);
+    copy(img, 0, this.y, width, this.h, offsetInt, this.y, width, this.h);
+    copy(quoteLayer, 0, this.y, width, this.h, offsetInt, this.y, width, this.h);
   }
 }
