@@ -79,7 +79,7 @@ class GlitchSlice {
   }
 
   update() {
-    this.currentOffset *= 0.85;
+    this.currentOffset *= 0.55;
   }
 
   display() {
