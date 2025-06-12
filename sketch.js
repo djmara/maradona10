@@ -30,7 +30,7 @@ function draw() {
   image(img, 0, 0);
 
   let newSlices = glitchSlowdown ? 20 : 200;
-  let maxOffset = glitchSlowdown ? 30 : 300;
+  let maxOffset = glitchSlowdown ? 10 : 100;
 
   for (let i = 0; i < newSlices; i++) {
     let h = int(random(10, 50));
@@ -55,7 +55,7 @@ function drawButton() {
   fill(20, 20, 20, 200);
   stroke(255);
   rectMode(CENTER);
-  rect(width / 2, height - 40, 160, 42);
+  rect(width / 2, height - 40, 160, 45);
   fill(255);
   noStroke();
   textAlign(CENTER, CENTER);
@@ -79,7 +79,7 @@ class GlitchSlice {
   }
 
   update() {
-    this.currentOffset *= 0.55;
+    this.currentOffset *= 0.10;
   }
 
   display() {
