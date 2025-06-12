@@ -1,80 +1,92 @@
+MAKE THIS CODE JS FRIENDLY:
 
-let img;
-let quoteLayer;
-let slices = [];
-let font;
-let quote = " \"That goal became part of soccer history...\nThere are still 10-year-old kids out there today\nwith 'Maradona' on their backs.\" ";
+PImage img;
+PGraphics quoteLayer;
+ArrayList<GlitchSlice> slices = new ArrayList<GlitchSlice>();
+PFont font;
 
-function preload() {
+String quote = " \"That goal became part of soccer history...\nThere are still 10-year-old kids out there today\nwith 'Maradona' on their backs.\" ";
+
+boolean glitchSlowdown = false;
+
+void setup() {
+  size(1280, 720);
   img = loadImage("maradona.jpg");
-  font = loadFont("https://cdnjs.cloudflare.com/ajax/libs/topcoat/0.8.0/font/SourceCodePro-Regular.otf");
-}
-
-function setup() {
-  createCanvas(1280, 720);
   img.resize(width, height);
+  font = createFont("Courier", 30);
 
   quoteLayer = createGraphics(width, height);
+  quoteLayer.beginDraw();
   quoteLayer.clear();
   quoteLayer.fill(255);
   quoteLayer.textFont(font);
-  quoteLayer.textSize(30);
   quoteLayer.textAlign(CENTER, CENTER);
   quoteLayer.text(quote, width / 2, height / 2);
+  quoteLayer.endDraw();
 }
 
-function draw() {
+void draw() {
   background(0);
   image(img, 0, 0);
-  for (let s of slices) {
+
+  int newSlices = glitchSlowdown ? 30 : 600;
+  float maxOffset = glitchSlowdown ? 8 : 700;
+
+  for (int i = 0; i < newSlices; i++) {
+    int h = int(random(10, 100));
+    int y = int(random(height - h));
+    float offset = random(-maxOffset, maxOffset);
+    slices.add(new GlitchSlice(y, h, offset));
+  }
+
+  for (GlitchSlice s : slices) {
     s.update();
     s.display();
   }
-}
 
-function triggerGlitchStorm() {
-  for (let i = 0; i < 60; i++) {
-    let h = floor(random(8, 30));
-    let y = floor(random(height - h));
-    let offset = floor(random(-100, 100));
-    slices.push(new GlitchSlice(y, h, offset));
-  }
-}
-
-function keyPressed() {
-  if (key === 'g' || key === 'G') {
-    triggerGlitchStorm();
-  }
-}
-
-function mouseMoved() {
-  for (let i = 0; i < 5; i++) {
-    let h = floor(random(5, 20));
-    let y = floor(random(height - h));
-    let offset = floor(random(-60, 60));
-    slices.push(new GlitchSlice(y, h, offset));
+  if (slices.size() > 800) {
+    slices.subList(0, slices.size() - 800).clear();
   }
 
-  if (slices.length > 200) {
-    slices.splice(0, slices.length - 200);
+  drawButton();
+}
+
+void drawButton() {
+  fill(20, 20, 20, 200);
+  stroke(255);
+  rectMode(CENTER);
+  rect(width / 2, height - 40, 160, 40);
+  fill(255);
+  textAlign(CENTER, CENTER);
+  textFont(font, 16);
+  text(glitchSlowdown ? "RUN FREE" : "THE NUMBER 10", width / 2, height - 40);
+}
+
+void mousePressed() {
+  // Check if the button is clicked
+  if (mouseX > width / 2 - 80 && mouseX < width / 2 + 80 &&
+      mouseY > height - 60 && mouseY < height - 20) {
+    glitchSlowdown = !glitchSlowdown;
   }
 }
 
 class GlitchSlice {
-  constructor(y, h, offset) {
+  int y, h;
+  float currentOffset;
+
+  GlitchSlice(int y, int h, float offset) {
     this.y = y;
     this.h = h;
-    this.originalOffset = offset;
     this.currentOffset = offset;
   }
 
-  update() {
-    this.currentOffset *= 0.9;
+  void update() {
+    currentOffset *= 0.85;
   }
 
-  display() {
-    let offsetInt = int(this.currentOffset);
-    copy(img, 0, this.y, width, this.h, offsetInt, this.y, width, this.h);
-    copy(quoteLayer, 0, this.y, width, this.h, offsetInt, this.y, width, this.h);
+  void display() {
+    int offsetInt = int(currentOffset);
+    copy(img, 0, y, width, h, offsetInt, y, width, h);
+    copy(quoteLayer, 0, y, width, h, offsetInt, y, width, h);
   }
 }
