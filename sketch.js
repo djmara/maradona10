@@ -29,7 +29,7 @@ function draw() {
   background(0);
   image(img, 0, 0);
 
-  let newSlices = glitchSlowdown ? 20 : 200;
+  let newSlices = glitchSlowdown ? 20 : 600;
   let maxOffset = glitchSlowdown ? 10 : 100;
 
   for (let i = 0; i < newSlices; i++) {
@@ -61,7 +61,7 @@ function drawButton() {
   textAlign(CENTER, CENTER);
   textFont(font);
   textSize(16);
-  text(glitchSlowdown ? "RUN FREE" : "THE NUMBER 125", width / 2, height - 46);
+  text(glitchSlowdown ? "RUN FREE" : "THE NUMBER 126", width / 2, height - 43);
 }
 
 function mousePressed() {
