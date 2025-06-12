@@ -6,7 +6,7 @@ String quote = " \"That goal became part of soccer history...\nThere are still 1
 
 void setup() {
   size(1280, 720);
-  img = loadImage("maradona.jpeg"); 
+  img = loadImage("maradona.jpg"); 
   img.resize(width, height);
   font = createFont("Courier", 30);
 
